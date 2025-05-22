@@ -1,0 +1,114 @@
+.mini-player {
+    position: fixed;
+    background: rgba(20, 20, 20, 0.85);
+    backdrop-filter: blur(10px);
+    color: white;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.5);
+    z-index: 9999;
+    transition: all 0.3s ease;
+    width: 300px;
+    cursor: grab;
+    transition: box-shadow 0.2s ease; /* no transform animation */
+    will-change: transform;
+  }
+  
+  .mini-player.minimized {
+    height: 40px;
+    width: 250px;
+  }
+  
+  .mini-drag-handle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 10px;
+    cursor: move;
+  }
+  
+  .mini-marquee {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+
+  }
+  .mini-marquee-text {
+    font-size: 12px;
+    display: inline-block;
+    padding-left: 100%;
+    animation: marquee 10s linear infinite;
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-100%); }
+  }
+  
+  .mini-toggle {
+    position: absolute;
+    top: -15px;
+    right: 20px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    padding: 6px 0 0 2px;
+    margin: 0;
+    background: var(--gray);
+    color: white;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    transition: background 0.2s ease;
+  }
+
+  .mini-toggle-close {
+    position: absolute;
+    top: -10px;
+    right: -8px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    padding: 2px 0 0 0;
+    margin: 0;
+    background: var(--gray);
+    color: white;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    transition: background 0.2s ease;
+  }
+  
+  .mini-progress {
+    height: 4px;
+    background: #444;
+    margin: 0 10px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .mini-progress-fill {
+    height: 100%;
+    background: var(--primary);
+    width: 0%;
+    transition: width 0.2s linear;
+  }
+  
+  .mini-controls {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0;
+  }
+  .mini-controls button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+
+    margin: 0;
+  }
+  body.dragging,
+html.dragging {
+  user-select: none;
+}

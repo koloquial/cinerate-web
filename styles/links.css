@@ -1,0 +1,36 @@
+a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.2s ease, text-decoration 0.2s ease;
+  }
+  
+  a:hover {
+    color: var(--hover);
+    text-decoration: underline;
+  }
+  
+  a:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+  
+  a.button-link {
+    font-weight: 500;
+    padding: 0.4rem 0.75rem;
+    border-radius: 6px;
+    background-color: transparent;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    transition: all 0.2s ease;
+  }
+  
+  a.button-link:hover {
+    background-color: var(--primary);
+    color: var(--white);
+    text-decoration: none;
+  }
+  
+  Link{
+    margin: 0;
+    padding: 0;
+  }

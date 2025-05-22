@@ -1,0 +1,35 @@
+.accordion {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-top: 1rem;
+    padding: 0.5rem 0.75rem;
+    background-color: var(--gray);
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--white);
+  }
+  
+  .accordion-header:hover {
+    background-color: var(--black);
+  }
+  
+  .accordion-body {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    font-size: 0.9rem;
+    color: var(--black);
+    line-height: 1.6;
+    p{
+        text-align: left;
+        font-size: 10px;
+    }
+  }
+  

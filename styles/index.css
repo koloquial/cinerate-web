@@ -1,0 +1,40 @@
+@import './palette.css';
+@import url('./buttons.css');
+@import url('./inputs.css');
+@import url('./forms.css');
+@import url('./spinner.css');
+@import url('./font.css');
+@import url('./links.css');
+@import url('./containers.css');
+@import url('./scrollbar.css');
+@import url('./sound.css');
+
+*{
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+    color: var(--white);
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: var(--black);
+  }
+  
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('http://localhost:3001/assets/backgrounds/cinerate-bg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.05; 
+    z-index: -1;
+    pointer-events: none;
+  }

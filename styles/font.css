@@ -1,0 +1,82 @@
+/* Form error message */
+.form-error {
+    color: var(--hover);
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+  }
+  
+  /* Status for username/email availability */
+  .status-message {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .status-available {
+    color: lime;
+  }
+  
+  .status-unavailable {
+    color: var(--hover);
+  }
+  
+  /* Links for login/reset inside status */
+  .status-message a {
+    color: var(--primary);
+    text-decoration: underline;
+  }
+
+/* Title/Header (used on homepage and elsewhere) */
+.title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  /* Paragraph text (used for blurbs, descriptions) */
+  p {
+    font-size: 1.1rem;
+    color: var(--white);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  /* Smaller supporting text */
+  small {
+    font-size: 0.85rem;
+    color: var(--white);
+  }
+  
+  /* Section headers or subheadings */
+  h2 {
+    font-size: 1.75rem;
+    color: var(--white);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .bold{
+    font-weight: bold;
+  }
+
+  .white{
+    color: var(--white);
+  }
+
+  .primary{
+    color: var(--primary);
+  }
+  
+  /* Optional: body default font style */
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--white);
+    background-color: var(--black);
+  }
+
+  h1, h2, h3, h4, h5, p{
+    cursor: default;
+  }

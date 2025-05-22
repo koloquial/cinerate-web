@@ -1,95 +1,47 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+import Link from 'next/link';
+import './homepage.css'; // for custom styles
+import { FiUser } from 'react-icons/fi';
+import { FaRegQuestionCircle } from 'react-icons/fa';
+import { FaTheaterMasks, FaUsers, FaWineGlass } from 'react-icons/fa';
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <main className="homepage-container">
+      <div className="homepage-content">
+        <h1 className="title">
+          <span className="primary">Cine</span><span className="white">Rate</span>
+        </h1>
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+        <div className="tagline">
+        <p>
+  <FaTheaterMasks size={50} color="var(--primary)" /><br />
+  Step into the critic’s chair.
+</p>
+
+<p>
+  <FaUsers size={50} color="var(--primary)" /><br />
+  Guess IMDb scores in style — friends, foes, or total film nerds.
+</p>
+
+<p>
+  <FaWineGlass size={50} color="var(--primary)" /><br />
+  No film degree required—just taste, timing, and a little bravado.
+</p>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+        <div className="cta-buttons">
+          <Link href="/create-game" className="button primary">
+            <FiUser size={18} style={{ marginRight: '0.5rem' }} />
+            Sign Up
+          </Link>
+          <Link href="/how-to-play" className="button ghost">
+            <FaRegQuestionCircle size={16} style={{ marginRight: '0.5rem' }} />
+            How to Play
+          </Link>
+        </div>
+      </div>
+
+    </main>
   );
 }

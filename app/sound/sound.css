@@ -1,0 +1,83 @@
+.sound-page {
+    max-width: 600px;
+    margin: auto;
+    color: var(--white);
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.5); /* subtle dark glass */
+    backdrop-filter: blur(12px);
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  }
+  
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .controls button,
+  .controls a {
+    background: transparent;
+    border: none;
+    color: var(--white);
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  
+  .controls button:hover,
+  .controls a:hover {
+    color: var(--primary);
+  }
+  
+  .controls input[type="range"] {
+    width: 100px;
+    accent-color: var(--primary);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .progress-bar {
+    height: 6px;
+    background: var(--gray);
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background: var(--primary);
+    width: 0%;
+    transition: width 0.2s linear;
+  }
+  
+  .track-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .track-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.6rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    transition: background 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .track-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+  
+  .track-item.active {
+    background: var(--primary);
+    font-weight: bold;
+    color: var(--white);
+  }
+  
