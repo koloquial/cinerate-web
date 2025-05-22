@@ -2,7 +2,6 @@
 import { useMusic } from '@/context/MusicPlayerContext';
 import Navbar from '@/components/Navbar';
 import GameRedirect from '@/components/GameRedirect';
-import Footer from '@/components/Footer';
 import MiniPlayer from '@/components/MiniPlayer';
 
 export default function AppContent({ children }) {
@@ -14,7 +13,6 @@ export default function AppContent({ children }) {
       <GameRedirect />
       {children}
       {showMiniPlayer && <MiniPlayer />}
-      <Footer />
     </>
   );
 }

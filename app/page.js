@@ -31,7 +31,7 @@ export default function HomePage() {
         </div>
 
         <div className="cta-buttons">
-          <Link href="/create-game" className="button primary">
+          <Link href="/signup" className="button primary">
             <FiUser size={18} style={{ marginRight: '0.5rem' }} />
             Sign Up
           </Link>

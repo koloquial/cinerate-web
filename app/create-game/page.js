@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useMongo } from '@/context/MongoContext';
 import { useSocket } from '@/context/SocketContext';
+import './create-game.css'; // New optional CSS module or global file
 
 export default function CreateGamePage() {
   const { profile } = useMongo();
@@ -22,7 +23,7 @@ export default function CreateGamePage() {
       isPrivate,
       password: isPrivate ? password : null,
       maxPlayers: playerCount,
-      players: [{ id: profile.username, name: profile.username }]
+      players: [{ id: profile.username, name: profile.username }],
     };
 
     createGame(gameData);
@@ -30,38 +31,48 @@ export default function CreateGamePage() {
   };
 
   return (
-    <form className="auth-form" onSubmit={(e) => { e.preventDefault(); handleCreate(); }}>
-      <h2>Create Game</h2>
+    <form className="create-game-form" onSubmit={(e) => { e.preventDefault(); handleCreate(); }}>
+      <h2>Create New Game</h2>
 
-      <label>
-        <input
-          type="checkbox"
-          checked={isPrivate}
-          onChange={() => setIsPrivate(!isPrivate)}
-        /> Private Game
-      </label>
+      <div className="form-group">
+        <label>
+          <input
+            type="checkbox"
+            checked={isPrivate}
+            onChange={() => setIsPrivate(!isPrivate)}
+          />{' '}
+          Private Game
+        </label>
+      </div>
 
       {isPrivate && (
-        <input
-          className="input"
-          placeholder="Enter password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <div className="form-group">
+          <input
+            type="text"
+            className="input"
+            placeholder="Enter password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
       )}
 
-      <label style={{ marginTop: '1rem' }}>Players: {playerCount}</label>
-      <input
-        className="input"
-        type="range"
-        min="2"
-        max="8"
-        value={playerCount}
-        onChange={(e) => setPlayerCount(parseInt(e.target.value))}
-      />
+      <div className="form-group">
+        <label htmlFor="player-count">Number of Players</label>
+        <select
+          id="player-count"
+          className="input"
+          value={playerCount}
+          onChange={(e) => setPlayerCount(parseInt(e.target.value))}
+        >
+          {[2, 3, 4, 5, 6, 7, 8].map((n) => (
+            <option key={n} value={n}>{n} Players</option>
+          ))}
+        </select>
+      </div>
 
-      <button type="submit" className="button" style={{ marginTop: '1.5rem' }}>
-        Create
+      <button type="submit" className="button submit-btn">
+        Create Game
       </button>
     </form>
   );
