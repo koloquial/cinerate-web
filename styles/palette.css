@@ -1,0 +1,197 @@
+/* =========================================
+   CineRate / Sunbalm Palette
+   File: styles/palette.css
+   -----------------------------------------
+   - Brand hues with HSL for easy tweaking
+   - Semantic tokens derived from brand hues
+   - Light/Dark via prefers-color-scheme
+   - Extras: gradients, shadows, radii
+   ========================================= */
+
+/* -------- Brand Primitives (HSL) -------- */
+:root {
+  /* Sun / Warm (primary) */
+  --sun-h: 45;
+  --sun-s: 96%;
+  --sun-l: 62%;
+
+  /* Coral / Accent A */
+  --coral-h: 10;
+  --coral-s: 82%;
+  --coral-l: 61%;
+
+  /* Teal / Accent B */
+  --teal-h: 174;
+  --teal-s: 60%;
+  --teal-l: 40%;
+
+  /* Sand / Neutrals */
+  --sand-h: 36;
+  --sand-s: 41%;
+  --sand-l: 90%;
+
+  /* Ink / Paper base */
+  --ink-h: 222;
+  --ink-s: 30%;
+  --ink-l: 12%;
+  --paper: hsl(0 0% 100%);
+
+  /* Derived brand colors */
+  --sun: hsl(var(--sun-h) var(--sun-s) var(--sun-l));
+  --coral: hsl(var(--coral-h) var(--coral-s) var(--coral-l));
+  --teal: hsl(var(--teal-h) var(--teal-s) var(--teal-l));
+  --sand: hsl(var(--sand-h) var(--sand-s) var(--sand-l));
+  --ink: hsl(var(--ink-h) var(--ink-s) var(--ink-l));
+
+  /* Tints/Shades (light theme bias) */
+  --sun-50: hsl(var(--sun-h) var(--sun-s) 96%);
+  --sun-100: hsl(var(--sun-h) var(--sun-s) 90%);
+  --sun-200: hsl(var(--sun-h) var(--sun-s) 80%);
+  --sun-300: hsl(var(--sun-h) var(--sun-s) 70%);
+  --sun-700: hsl(var(--sun-h) var(--sun-s) 45%);
+
+  --coral-100: hsl(var(--coral-h) var(--coral-s) 92%);
+  --coral-200: hsl(var(--coral-h) var(--coral-s) 84%);
+  --coral-700: hsl(var(--coral-h) var(--coral-s) 45%);
+
+  --teal-100: hsl(var(--teal-h) var(--teal-s) 92%);
+  --teal-200: hsl(var(--teal-h) var(--teal-s) 84%);
+  --teal-700: hsl(var(--teal-h) var(--teal-s) 30%);
+
+  --ink-600: hsl(var(--ink-h) var(--ink-s) 22%);
+  --ink-700: hsl(var(--ink-h) var(--ink-s) 16%);
+  --ink-800: hsl(var(--ink-h) var(--ink-s) 12%);
+  --ink-900: hsl(var(--ink-h) var(--ink-s) 9%);
+
+  /* -------- Semantic Tokens (Light) -------- */
+  --bg: var(--paper);
+  --surface: hsl(0 0% 100%);
+  --surface-2: hsl(0 0% 98%);
+  --text: var(--ink);
+  --muted: hsl(220 8% 42%);
+  --border: hsl(220 14% 88%);
+
+  --primary: var(--sun);
+  --primary-contrast: hsl(0 0% 12%);
+  --accent: var(--teal);
+  --accent-contrast: white;
+  --highlight: var(--coral);
+  --highlight-contrast: white;
+
+  /* States */
+  --success: hsl(150 55% 42%);
+  --warning: hsl(40 95% 55%);
+  --error: hsl(355 76% 52%);
+
+  /* Subtle fills / overlays */
+  --fill-soft: color-mix(in oklab, var(--sun) 6%, white);
+  --fill-accent: color-mix(in oklab, var(--teal) 10%, white);
+  --overlay: rgba(0, 0, 0, 0.5);
+
+  /* Gradients */
+  --grad-sunrise: linear-gradient(135deg,
+      hsl(var(--sun-h) var(--sun-s) 80%) 0%,
+      hsl(var(--coral-h) var(--coral-s) 70%) 50%,
+      hsl(var(--teal-h) var(--teal-s) 55%) 100%);
+  --grad-seafoam: linear-gradient(135deg,
+      hsl(var(--teal-h) var(--teal-s) 40%) 0%,
+      hsl(var(--teal-h) var(--teal-s) 55%) 50%,
+      hsl(var(--sun-h) var(--sun-s) 72%) 100%);
+
+  /* Shadows (elevations) */
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-2: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-3: 0 12px 24px rgba(0, 0, 0, 0.12);
+
+  /* Radii */
+  --radius-s: 6px;
+  --radius-m: 10px;
+  --radius-l: 16px;
+  --radius-xl: 24px;
+
+  /* Focus ring */
+  --focus: 0 0 0 3px color-mix(in oklab, var(--accent) 35%, white);
+}
+
+/* -------- Dark Mode (system) -------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: hsl(222 15% 10%);
+    --bg: var(--paper);
+    --surface: hsl(222 15% 12%);
+    --surface-2: hsl(222 15% 14%);
+    --text: hsl(0 0% 98%);
+    --muted: hsl(220 8% 70%);
+    --border: hsl(220 12% 22%);
+
+    /* Dark-biased shades */
+    --sun-100: hsl(var(--sun-h) var(--sun-s) 24%);
+    --coral-200: hsl(var(--coral-h) var(--coral-s) 28%);
+    --teal-200: hsl(var(--teal-h) var(--teal-s) 28%);
+
+    --primary: hsl(var(--sun-h) var(--sun-s) 60%);
+    --primary-contrast: hsl(0 0% 8%);
+    --accent: hsl(var(--teal-h) var(--teal-s) 50%);
+    --accent-contrast: white;
+    --highlight: hsl(var(--coral-h) var(--coral-s) 55%);
+    --highlight-contrast: white;
+
+    --fill-soft: color-mix(in oklab, var(--sun) 20%, black);
+    --fill-accent: color-mix(in oklab, var(--teal) 22%, black);
+    --overlay: rgba(0, 0, 0, 0.6);
+
+    --focus: 0 0 0 3px color-mix(in oklab, var(--accent) 50%, black);
+  }
+}
+
+/* Optional: manual theme toggle via class on <html> or <body>
+   html.light :root { ...override if needed... }
+   html.dark  :root { ...override if needed... }
+*/
+
+/* -------- Quick Utility Examples -------- */
+/* (Use these tokens in index.css or component styles) */
+.u-bg {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.u-surface {
+  background: var(--surface);
+  box-shadow: var(--shadow-1);
+  border: 1px solid var(--border);
+}
+
+.u-surface-2 {
+  background: var(--surface-2);
+  box-shadow: var(--shadow-2);
+  border: 1px solid var(--border);
+}
+
+.u-primary {
+  background: var(--primary);
+  color: var(--primary-contrast);
+}
+
+.u-accent {
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+
+.u-highlight {
+  background: var(--highlight);
+  color: var(--highlight-contrast);
+}
+
+.u-border {
+  border: 1px solid var(--border);
+}
+
+.u-rounded {
+  border-radius: var(--radius-m);
+}
+
+.u-focus:focus {
+  outline: none;
+  box-shadow: var(--focus);
+}
