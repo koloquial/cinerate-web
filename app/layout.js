@@ -14,6 +14,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <meta name="theme-color" content="#111827" />
+      </head>
       <body className="page">
         <AuthProvider>
           <MusicProvider>
