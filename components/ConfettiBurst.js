@@ -13,26 +13,26 @@ export default function ConfettiBurst({ onceKey = "default" }) {
       fired.current = true;
 
       // Try dynamic import of canvas-confetti if user installed it
-      try {
-        const confetti = (await import("canvas-confetti")).default;
-        if (cancelled) return;
-        const count = 160;
-        const defaults = { origin: { y: 0.7 } };
+      // try {
+      //   const confetti = (await import("canvas-confetti")).default;
+      //   if (cancelled) return;
+      //   const count = 160;
+      //   const defaults = { origin: { y: 0.7 } };
 
-        function fire(particleRatio, opts) {
-          confetti({ ...defaults, ...opts, particleCount: Math.floor(count * particleRatio) });
-        }
+      //   function fire(particleRatio, opts) {
+      //     confetti({ ...defaults, ...opts, particleCount: Math.floor(count * particleRatio) });
+      //   }
 
-        fire(0.25, { spread: 26, startVelocity: 55 });
-        fire(0.2, { spread: 60 });
-        fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
-        fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
-        fire(0.1, { spread: 120, startVelocity: 45 });
-        return;
-      } catch {
-        // Fallback CSS confetti
-        spawnCssConfetti();
-      }
+      //   fire(0.25, { spread: 26, startVelocity: 55 });
+      //   fire(0.2, { spread: 60 });
+      //   fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+      //   fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+      //   fire(0.1, { spread: 120, startVelocity: 45 });
+      //   return;
+      // } catch {
+      // Fallback CSS confetti
+      spawnCssConfetti();
+      // }
     }
 
     function spawnCssConfetti() {
