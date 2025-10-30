@@ -57,7 +57,7 @@ export default function RevealPanel({ room }) {
               const delta = isFinite(actual) ? Math.abs(actual - g.value) : null;
               const isWinner = round?.winnerUid && g.uid === round.winnerUid;
               return (
-                <tr key={g.uid} style={{ background: isWinner ? "var(--teal-100)" : "transparent" }}>
+                <tr key={g.uid}>
                   <td>{g.name}</td>
                   <td>{isFinite(g.value) ? g.value.toFixed(1) : "—"}</td>
                   <td>{delta == null ? "—" : delta.toFixed(2)}</td>

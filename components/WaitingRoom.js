@@ -9,6 +9,7 @@ import Scorebar from "@/components/Scorebar";
 import GuessPanel from "@/components/GuessPanel";
 import RevealPanel from "@/components/RevealPanel";
 import { useToast } from "@/contexts/ToastProvider";
+import ConfettiBurst from "@/components/ConfettiBurst";
 
 export default function WaitingRoom({ room, currentUser, onLeave }) {
   if (!room || !room.roomId) return null;
@@ -189,15 +190,44 @@ export default function WaitingRoom({ room, currentUser, onLeave }) {
         )
       }
 
-      {
-        finished && (
-          <div className="card mt-12">
-            <h3>Game Over</h3>
-            <p>Returning to dashboard shortly, or you can leave now.</p>
-            <button className="btn mt-12" onClick={onLeave}>Leave Room</button>
-          </div>
-        )
-      }
+      {finished && (
+        <div className="card card-lg mt-12">
+          {/* Confetti on finish */}
+          <ConfettiBurst onceKey={room.roomId + ":finished"} />
+
+          <h3 style={{ marginTop: 0 }}>Game Over</h3>
+
+          {room?.result ? (
+            <div className="grid grid-2 mt-12">
+              <div>
+                <div style={{ fontSize: "1.1rem" }}>
+                  Winner: <strong>{room.result.winnerName}</strong>
+                </div>
+                <div className="mt-6">
+                  Final Score: <strong>{room.result.score}</strong>
+                </div>
+                <div className="mt-6">
+                  Winner’s Avg Δ (this game):{" "}
+                  <strong>{room.result.avgDelta !== null ? room.result.avgDelta.toFixed(2) : "—"}</strong>
+                </div>
+              </div>
+              <div>
+                <div className="badge badge-accent">GG!</div>
+                <p className="mt-6" style={{ opacity: 0.8 }}>
+                  Returning to dashboard shortly, or leave now.
+                </p>
+                <button className="btn mt-12" onClick={onLeave}>Leave Room</button>
+              </div>
+            </div>
+          ) : (
+            <>
+              <p>Returning to dashboard shortly, or you can leave now.</p>
+              <button className="btn mt-12" onClick={onLeave}>Leave Room</button>
+            </>
+          )}
+        </div>
+      )}
+
 
       {/* Chat */}
       {
