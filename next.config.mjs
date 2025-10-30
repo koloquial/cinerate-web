@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
+  output: 'export',
+  images: { unoptimized: true }, // optional but helpful on Render
 };
 
-export default nextConfig;
+module.exports = nextConfig;

@@ -5,8 +5,8 @@
   "engines": { "node": "24" },
   "scripts": {
     "dev": "next dev --webpack",
-    "build": "next build --webpack",
-    "start": "next start",
+    "build": "next build && next export",
+    "start": "next start -p $PORT",
     "lint": "eslint"
   },
   "dependencies": {
