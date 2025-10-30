@@ -13,12 +13,22 @@ export default function GuessPanel({ room, currentUser }) {
   const submittedRef = useRef(false);
   const endsAt = room?.endsAt ?? 0;
 
+  const round = room?.currentRound;
+
+  // Log the current round/movie so you can inspect all fields
+  useEffect(() => {
+    // This will show: omdbId, title, year, poster, imdbRating (number), guesses[], picker*, etc.
+    // (Depends on your server payload.)
+    // eslint-disable-next-line no-console
+    console.log("[GuessPanel] currentRound:", round);
+  }, [round]);
+
   // reset each round
   useEffect(() => {
     setVal(5.0);
     setSubmitted(false);
     submittedRef.current = false;
-  }, [room?.currentRound?.roundNumber]);
+  }, [round?.roundNumber]);
 
   // Auto-submit current slider value at timeout if not submitted
   useEffect(() => {
@@ -47,8 +57,6 @@ export default function GuessPanel({ room, currentUser }) {
     });
   }
 
-  const round = room?.currentRound;
-
   return (
     <div className="grid gap-12">
       <div className="flex items-center justify-between">
@@ -59,6 +67,43 @@ export default function GuessPanel({ room, currentUser }) {
         <TimerBadge endsAt={endsAt} />
       </div>
 
+      {/* Movie summary (no spoilers) */}
+      <div className="card">
+        <div className="grid grid-2">
+          <div className="flex items-center gap-12">
+            {/* Poster */}
+            {round?.poster && round.poster !== "N/A" ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={round.poster}
+                alt={`${round?.title || "Movie"} poster`}
+                width={84}
+                height={126}
+                style={{ borderRadius: "var(--radius-s)" }}
+              />
+            ) : (
+              <div
+                className="card"
+                style={{ width: 84, height: 126, borderRadius: "var(--radius-s)" }}
+                aria-hidden="true"
+              />
+            )}
+            <div>
+              <div style={{ fontWeight: 800 }}>
+                {round?.title || "Unknown title"}
+              </div>
+              <small style={{ opacity: 0.8 }}>{round?.year || ""}</small>
+              <div className="mt-6">
+                <small>
+                  Picker: <strong>{round?.pickerName || "—"}</strong>
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Guess controls */}
       <div className="card">
         <div className="flex items-center gap-12">
           <strong>Value:</strong>
@@ -83,11 +128,6 @@ export default function GuessPanel({ room, currentUser }) {
             {submitted ? "Submitted" : "Submit Guess"}
           </button>
         </div>
-      </div>
-
-      {/* Optional: show who the picker is, but hide movie details */}
-      <div className="card">
-        <small>Picker:</small> <strong>{round?.pickerName}</strong>
       </div>
     </div>
   );

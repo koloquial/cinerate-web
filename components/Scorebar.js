@@ -11,7 +11,7 @@ export default function Scorebar({ room }) {
             {p.displayName}: {p.score ?? 0}
           </span>
         ))}
-        <span className="badge" title="Target score">🎯 {room?.targetScore ?? 5}</span>
+        {/* <span className="badge" title="Target score">🎯 {room?.targetScore ?? 5}</span> */}
       </div>
     </div>
   );
