@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthProvider";
@@ -19,11 +19,6 @@ export default function HomePage() {
   // ------- local state -------
   const [mode, setMode] = useState("login"); // "login" | "signup"
   const [busy, setBusy] = useState(false);
-
-  const authRef = useRef < HTMLDivElement | null > (null);
-  function scrollToAuth() {
-    authRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
 
   const [signUpData, setSignUpData] = useState({
     email: "",
@@ -99,55 +94,8 @@ export default function HomePage() {
 
   return (
     <main className="container grid gap-12">
-      {/* Hero */}
-      <section className="card card-lg" style={{ position: "relative", overflow: "hidden" }}>
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "var(--grad-sunrise)",
-            opacity: 0.08,
-            pointerEvents: "none",
-          }}
-        />
-
-        <p className="mt-12" style={{ maxWidth: 760 }}>
-          Guess IMDb ratings with friends in real time. One player picks a movie, everyone
-          slides a guess (0.0–10.0), and the closest <em>without going over</em> scores a point.
-          First to 5 wins. Built for movie nights, inside jokes, and a dash of sibling rivalry.
-        </p>
-        <div className="flex items-center gap-12 mt-12" style={{ flexWrap: "wrap" }}>
-          <a className="btn" href="/how-to-play">How to Play</a>
-          <a className="btn" href="/about">About</a>
-          <button
-            className="btn btn-primary"
-            type="button"
-            onClick={scrollToAuth}
-            aria-controls="auth-section"
-          >
-            Sign up / Log in
-          </button>
-        </div>
-      </section>
-
-      {/* Highlights */}
-      <section className="grid grid-3">
-        <div className="card">
-          <h3>🎬 Pick Any Film</h3>
-          <p>Search, lock a title, and keep things fresh — no repeats within a game.</p>
-        </div>
-        <div className="card">
-          <h3>🎯 Closest Wins</h3>
-          <p>Slide to guess the IMDb score with <strong>0.1</strong> precision. Don’t go over!</p>
-        </div>
-        <div className="card">
-          <h3>💬 Chat + 🎧 Music</h3>
-          <p>Talk in-room, keep the vibes with a persistent playlist, and play on.</p>
-        </div>
-      </section>
-
       {/* Auth Section (Tabbed) */}
-      <section id="auth-section" ref={authRef} className="card card-lg">
+      <section className="card card-lg">
         <div className="tabs" role="tablist" aria-label="Auth Tabs">
           <button
             id="tab-login"
@@ -292,6 +240,45 @@ export default function HomePage() {
 
           </div>
         )}
+      </section>
+
+      {/* Hero */}
+      <section className="card card-lg" style={{ position: "relative", overflow: "hidden" }}>
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "var(--grad-sunrise)",
+            opacity: 0.08,
+            pointerEvents: "none",
+          }}
+        />
+
+        <p className="mt-12" style={{ maxWidth: 760 }}>
+          Guess IMDb ratings with friends in real time. One player picks a movie, everyone
+          slides a guess (0.0–10.0), and the closest <em>without going over</em> scores a point.
+          First to 5 wins. Built for movie nights, inside jokes, and a dash of sibling rivalry.
+        </p>
+        <div className="flex items-center gap-12 mt-12" style={{ flexWrap: "wrap" }}>
+          <a className="btn" href="/how-to-play">How to Play</a>
+          <a className="btn" href="/about">About</a>
+        </div>
+      </section>
+
+      {/* Highlights */}
+      <section className="grid grid-3">
+        <div className="card">
+          <h3>🎬 Pick Any Film</h3>
+          <p>Search, lock a title, and keep things fresh — no repeats within a game.</p>
+        </div>
+        <div className="card">
+          <h3>🎯 Closest Wins</h3>
+          <p>Slide to guess the IMDb score with <strong>0.1</strong> precision. Don’t go over!</p>
+        </div>
+        <div className="card">
+          <h3>💬 Chat + 🎧 Music</h3>
+          <p>Talk in-room, keep the vibes with a persistent playlist, and play on.</p>
+        </div>
       </section>
 
 
