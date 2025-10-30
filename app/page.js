@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthProvider";
@@ -19,6 +19,11 @@ export default function HomePage() {
   // ------- local state -------
   const [mode, setMode] = useState("login"); // "login" | "signup"
   const [busy, setBusy] = useState(false);
+
+  const authRef = useRef < HTMLDivElement | null > (null);
+  function scrollToAuth() {
+    authRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 
   const [signUpData, setSignUpData] = useState({
     email: "",
@@ -114,6 +119,14 @@ export default function HomePage() {
         <div className="flex items-center gap-12 mt-12" style={{ flexWrap: "wrap" }}>
           <a className="btn" href="/how-to-play">How to Play</a>
           <a className="btn" href="/about">About</a>
+          <button
+            className="btn btn-primary"
+            type="button"
+            onClick={scrollToAuth}
+            aria-controls="auth-section"
+          >
+            Sign up / Log in
+          </button>
         </div>
       </section>
 
@@ -134,7 +147,7 @@ export default function HomePage() {
       </section>
 
       {/* Auth Section (Tabbed) */}
-      <section className="card card-lg">
+      <section id="auth-section" ref={authRef} className="card card-lg">
         <div className="tabs" role="tablist" aria-label="Auth Tabs">
           <button
             id="tab-login"
