@@ -3,9 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { getSocket } from "@/lib/socket";
 import CopyButton from "@/components/CopyButton";
-import Countdown from "@/components/Countdown";
 import MovieSearchPicker from "@/components/MovieSearchPicker";
-import Scorebar from "@/components/Scorebar";
 import GuessPanel from "@/components/GuessPanel";
 import RevealPanel from "@/components/RevealPanel";
 import { useToast } from "@/contexts/ToastProvider";
@@ -47,12 +45,12 @@ export default function WaitingRoom({ room, currentUser, onLeave }) {
   }, []);
 
   // auto-return to dashboard a few seconds after finish
-  useEffect(() => {
-    if (finished) {
-      const t = setTimeout(() => onLeave(), 5000);
-      return () => clearTimeout(t);
-    }
-  }, [finished, onLeave]);
+  // useEffect(() => {
+  //   if (finished) {
+  //     const t = setTimeout(() => onLeave(), 5000);
+  //     return () => clearTimeout(t);
+  //   }
+  // }, [finished, onLeave]);
 
   // chat wiring
   useEffect(() => {
@@ -84,6 +82,33 @@ export default function WaitingRoom({ room, currentUser, onLeave }) {
       show("Game started!");
     });
   }
+
+  function handlePlayAgain() {
+    const socket = getSocket();
+    socket.emit("game:play_again", (res) => {
+      if (!res?.ok) return show(res?.error || "Vote failed", { kind: "error" });
+      show("Voted to play again!");
+    });
+  }
+
+  function handleRestart() {
+    const socket = getSocket();
+    socket.emit("game:restart", (res) => {
+      if (!res?.ok) return show(res?.error || "Restart failed", { kind: "error" });
+      show("New game starting!");
+    });
+  }
+
+  function findHostUid(room) {
+    // Fallback: infer host by matching hostName to players' displayName
+    const match = room.players?.find((p) => p.displayName === room.hostName);
+    return match?.uid ?? null;
+  }
+  // Helper
+  const isHost = currentUser?.uid === findHostUid(room);
+  const votes = room.playAgainCount || 0;
+  const canHostRestart = isHost && votes >= 2 && (room.players?.length || 0) >= 2;
+
 
   function handleSendChat(e) {
     e.preventDefault();
@@ -153,8 +178,7 @@ export default function WaitingRoom({ room, currentUser, onLeave }) {
         </div>
       )}
 
-      {/* Scorebar (mid-game) */}
-      {!inWaiting && !finished && !inPicking && !inGuessing && <div className="mt-12"><Scorebar room={room} /></div>}
+
 
       {/* Phases */}
       {
@@ -200,6 +224,7 @@ export default function WaitingRoom({ room, currentUser, onLeave }) {
           {room?.result ? (
             <div className="grid grid-2 mt-12">
               <div>
+
                 <div style={{ fontSize: "1.1rem" }}>
                   Winner: <strong>{room.result.winnerName}</strong>
                 </div>
@@ -212,10 +237,21 @@ export default function WaitingRoom({ room, currentUser, onLeave }) {
                 </div>
               </div>
               <div>
-                <div className="badge badge-accent">GG!</div>
-                <p className="mt-6" style={{ opacity: 0.8 }}>
-                  Returning to dashboard shortly, or leave now.
-                </p>
+                {/* Play again voting */}
+                <div className="mt-12 flex items-center gap-12">
+                  <button className="btn btn-primary" onClick={handlePlayAgain}>
+                    Play again
+                  </button>
+                  <span className="badge">Votes: {votes}</span>
+                </div>
+                {/* Host-only restart control when votes are sufficient */}
+                {canHostRestart ? (
+                  <div className="mt-12">
+                    <button className="btn btn-accent" onClick={handleRestart}>
+                      Start New Game
+                    </button>
+                  </div>
+                ) : null}
                 <button className="btn mt-12" onClick={onLeave}>Leave Room</button>
               </div>
             </div>

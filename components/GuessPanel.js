@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { getSocket } from "@/lib/socket";
-import TimerBadge from "./TimerBadge";
+import Countdown from "./Countdown";
 import { useToast } from "@/contexts/ToastProvider";
+import { getSocket } from "@/lib/socket";
 
 export default function GuessPanel({ room, currentUser }) {
   const socket = getSocket();
@@ -11,31 +11,29 @@ export default function GuessPanel({ room, currentUser }) {
   const [val, setVal] = useState(5.0);
   const [submitted, setSubmitted] = useState(false);
   const submittedRef = useRef(false);
-  const endsAt = room?.endsAt ?? 0;
 
+  const endsAt = room?.endsAt ?? 0;
   const round = room?.currentRound;
 
-  // Log the current round/movie so you can inspect all fields
+  // Log the full round to inspect available properties
   useEffect(() => {
-    // This will show: omdbId, title, year, poster, imdbRating (number), guesses[], picker*, etc.
-    // (Depends on your server payload.)
     // eslint-disable-next-line no-console
     console.log("[GuessPanel] currentRound:", round);
   }, [round]);
 
-  // reset each round
+  // Reset slider each round
   useEffect(() => {
     setVal(5.0);
     setSubmitted(false);
     submittedRef.current = false;
   }, [round?.roundNumber]);
 
-  // Auto-submit current slider value at timeout if not submitted
+  // Auto-submit at timeout
   useEffect(() => {
     if (!endsAt) return;
     const id = setInterval(() => {
       if (Date.now() >= endsAt && !submittedRef.current) {
-        doSubmit(true); // auto
+        doSubmit(true);
       }
     }, 200);
     return () => clearInterval(id);
@@ -48,13 +46,23 @@ export default function GuessPanel({ room, currentUser }) {
     const value = Number(val);
     socket.emit("round:guess", { value }, (res) => {
       if (!res?.ok) {
-        // allow retry on error
         submittedRef.current = false;
         setSubmitted(false);
         return show(res?.error || "Guess failed", { kind: "error" });
       }
       show(auto ? `Auto-submitted: ${value.toFixed(1)}` : "Guess locked!");
     });
+  }
+
+  // Helper to conditionally render labeled rows
+  function InfoRow({ label, value }) {
+    if (!value || value === "N/A") return null;
+    return (
+      <div className="flex items-center" style={{ gap: 8 }}>
+        <small style={{ width: 92, opacity: 0.7 }}>{label}</small>
+        <div style={{ fontSize: 14 }}>{value}</div>
+      </div>
+    );
   }
 
   return (
@@ -64,22 +72,26 @@ export default function GuessPanel({ room, currentUser }) {
           <h2 style={{ margin: 0 }}>Make Your Guess</h2>
           <small>Closest to IMDb without going over earns the point.</small>
         </div>
-        <TimerBadge endsAt={endsAt} />
+        <Countdown endsAt={endsAt} />
       </div>
 
-      {/* Movie summary (no spoilers) */}
+      {/* Movie summary (no rating shown) */}
       <div className="card">
         <div className="grid grid-2">
-          <div className="flex items-center gap-12">
+          <div >
+            <div style={{ fontWeight: 800 }}>
+              {round?.title || "Unknown title"}
+            </div>
+
             {/* Poster */}
             {round?.poster && round.poster !== "N/A" ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={round.poster}
                 alt={`${round?.title || "Movie"} poster`}
-                width={84}
-                height={126}
-                style={{ borderRadius: "var(--radius-s)" }}
+                width={84 * 3}
+                height={126 * 3}
+                style={{ borderRadius: "var(--radius-s)", objectFit: "cover" }}
               />
             ) : (
               <div
@@ -89,25 +101,54 @@ export default function GuessPanel({ room, currentUser }) {
               />
             )}
             <div>
-              <div style={{ fontWeight: 800 }}>
-                {round?.title || "Unknown title"}
-              </div>
-              <small style={{ opacity: 0.8 }}>{round?.year || ""}</small>
-              <div className="mt-6">
-                <small>
-                  Picker: <strong>{round?.pickerName || "—"}</strong>
-                </small>
-              </div>
+              {round?.year ? (
+                <div className="mt-6">
+                  <small><strong>Released:</strong> {round.year}</small>
+                </div>
+              ) : null}
+              {round?.genre ? (
+                <div className="mt-6">
+                  <small><strong>Genre:</strong> {round.genre}</small>
+                </div>
+              ) : null}
+              {round?.runtime ? (
+                <div>
+                  <small><strong>Runtime:</strong> {round.runtime}</small>
+                </div>
+              ) : null}
+              {round?.plot ? (
+                <p className="mt-12" style={{ fontSize: 14, lineHeight: 1.35 }}>
+                  {round.plot}
+                </p>
+              ) : null}
             </div>
           </div>
         </div>
       </div>
 
+      {/* NEW: More details (collapsible) */}
+      <details className="card">
+        <summary style={{ cursor: "pointer", fontWeight: 600 }}>
+          More details
+        </summary>
+        <div className="mt-12 grid gap-8">
+          <InfoRow label="Director" value={round?.director} />
+          <InfoRow label="Writer" value={round?.writer} />
+          <InfoRow label="Actors" value={round?.actors} />
+          <InfoRow label="Awards" value={round?.awards} />
+          <InfoRow label="Rated" value={round?.rated} />
+          <InfoRow label="Language" value={round?.language} />
+          <InfoRow label="Country" value={round?.country} />
+          <InfoRow label="Box Office" value={round?.boxOffice} />
+          <InfoRow label="Production" value={round?.production} />
+        </div>
+      </details>
+
       {/* Guess controls */}
       <div className="card">
         <div className="flex items-center gap-12">
-          <strong>Value:</strong>
-          <span style={{ fontSize: "1.6rem" }}>{Number(val).toFixed(1)}</span>
+          <strong>Rating:</strong>
+          <span style={{ fontSize: "1.4rem" }}>{Number(val).toFixed(1)}</span>
         </div>
         <input
           className="range mt-12"

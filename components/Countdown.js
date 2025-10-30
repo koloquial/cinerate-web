@@ -18,5 +18,5 @@ export default function Countdown({ endsAt }) {
   const diff = Math.max(0, Math.floor((endsAt - now) / 1000));
   const mm = String(Math.floor(diff / 60)).padStart(2, "0");
   const ss = String(diff % 60).padStart(2, "0");
-  return <span>⏳{ss}</span>;
+  return <span>⏳{ss}s</span>;
 }

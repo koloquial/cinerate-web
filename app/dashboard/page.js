@@ -9,6 +9,7 @@ import CreateRoomForm from "@/components/CreateRoomForm";
 import WaitingRoom from "@/components/WaitingRoom";
 import Leaderboard from "@/components/Leaderboard";
 import { useToast } from "@/contexts/ToastProvider";
+import JoinRoomForm from "@/components/JoinRoomForm"; // 👈 NEW
 
 
 const ROOM_KEY = "cinerate:roomId";
@@ -111,9 +112,9 @@ export default function DashboardPage() {
     });
   }
 
-  function handleJoin(roomId) {
+  // 👇 UPDATED: accept roomId + password (no prompt)
+  function handleJoin(roomId, password = "") {
     const socket = getSocket();
-    const password = prompt("If this is private, enter password (or leave blank).") || "";
     socket.emit("room:join", { roomId, password }, (res) => {
       if (!res?.ok) return show(res?.error || "Failed to join room", { kind: "error" });
       localStorage.setItem(ROOM_KEY, roomId);
@@ -156,11 +157,13 @@ export default function DashboardPage() {
       ) : (
         <>
           <section>
-            <h2>Public Games</h2>
+            <CreateRoomForm onCreate={handleCreate} />
+          </section>
+          <section>
             <PublicGamesList games={games} onJoin={handleJoin} />
           </section>
           <section>
-            <CreateRoomForm onCreate={handleCreate} />
+            <JoinRoomForm onJoin={handleJoin} />
           </section>
           <Leaderboard />
         </>

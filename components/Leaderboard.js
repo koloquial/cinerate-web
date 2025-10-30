@@ -12,12 +12,16 @@ export default function Leaderboard() {
 
   return (
     <section className="card card-lg">
-      <h2>Leaderboard (Best Avg Δ)</h2>
+      <h2>Leaderboard</h2>
       <small className="mt-12" style={{ display: "block", opacity: .7 }}>Min 10 guesses to be ranked</small>
       <table className="table mt-12">
         <thead>
           <tr>
-            <th>#</th><th>Player</th><th>Avg Δ</th><th>Guesses</th><th>W-L</th>
+            <th>#</th>
+            <th>Player</th>
+            <th>Avg Δ</th>
+            {/* <th>Guesses</th>
+            <th>W-L</th> */}
           </tr>
         </thead>
         <tbody>
@@ -26,8 +30,8 @@ export default function Leaderboard() {
               <td>{i + 1}</td>
               <td>{r.displayName}</td>
               <td>{r.avgDelta?.toFixed?.(2) ?? r.avgDelta}</td>
-              <td>{r.totalGuesses}</td>
-              <td>{r.wins}-{r.losses}</td>
+              {/* <td>{r.totalGuesses}</td>
+              <td>{r.wins}-{r.losses}</td> */}
             </tr>
           ))}
           {rows.length === 0 && (
