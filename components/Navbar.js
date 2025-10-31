@@ -59,7 +59,7 @@ export default function Navbar() {
 
 
         <details className="show-sm explore">
-          <summary className="btn btn-ghost">Explore ▾</summary>
+          <summary className="btn btn-ghost">☰ ▾</summary>
           <div role="menu" className="card dropdown">
             <div style={{ display: "grid", gap: 8 }}>
               <button className="btn btn-ghost" onClick={() => router.push("/about")}>About</button>
@@ -86,7 +86,7 @@ export default function Navbar() {
             onClick={() => router.push("/dashboard")}
             title="Dashboard"
           >
-            Dashboard
+            ⌂
           </button>
         )}
 

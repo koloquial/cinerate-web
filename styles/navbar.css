@@ -1,4 +1,7 @@
 .navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 5px 12px;
   border-bottom: 1px solid var(--border);
   background: var(--surface);
@@ -12,9 +15,12 @@
   display: inline-block;
 }
 
-.nav-group{
-float: right;
-display: inline-block;
+.nav-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+
 }
 
 .navbar-title {
@@ -22,9 +28,6 @@ display: inline-block;
   letter-spacing: .3px;
 }
 
-
-
-/* existing */
 .show-sm {
   display: none;
 }
