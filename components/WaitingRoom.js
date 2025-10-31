@@ -134,6 +134,7 @@ export default function WaitingRoom({ room, currentUser, onLeave }) {
         {/* <div className="flex items-center gap-12">
           {room.endsAt ? <Countdown endsAt={room.endsAt} /> : null}
         </div> */}
+        <button className="btn" onClick={onLeave}>Leave Room</button>
       </div>
 
       {/* Waiting-only room info */}

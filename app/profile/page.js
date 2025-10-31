@@ -52,26 +52,7 @@ export default function ProfilePage() {
     }
   }
 
-  async function deleteAccount() {
-    if (!confirm("Delete your account permanently? This cannot be undone.")) return;
-    try {
-      setBusy(true);
-      const token = await currentUser.getIdToken();
-      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/account/delete`, {
-        method: "POST",
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const data = await res.json();
-      if (!data.ok) throw new Error(data.error || "Delete failed");
-      await signOut?.();
-      alert("Account deleted.");
-      router.replace("/");
-    } catch (e) {
-      alert(e.message);
-    } finally {
-      setBusy(false);
-    }
-  }
+
 
   if (loading || !currentUser) return <p style={{ padding: 16 }}>Loading…</p>;
 
@@ -121,7 +102,7 @@ export default function ProfilePage() {
         <h2>Danger Section</h2>
         <div className="flex items-center gap-12">
           <button className="btn" onClick={resetAccount} disabled={busy}>Reset Stats</button>
-          <button className="btn btn-danger" onClick={deleteAccount} disabled={busy}>Delete Account</button>
+
         </div>
       </section>
     </main>

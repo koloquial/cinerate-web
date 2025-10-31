@@ -1,16 +1,11 @@
-/* =========================================================
-   CineRate Global Styles
-   File: styles/index.css
-   ---------------------------------------------------------
-   Imports:
-   - palette.css  (CSS variables & semantic tokens)
-   - font.css     (your font-face declarations)
-   ========================================================= */
-
 @import "./palette.css";
 @import "./font.css";
+@import "./confetti.css";
+@import "./navbar.css";
+@import "./card.css";
+@import "./tabs.css";
+@import "./containers.css";
 
-/* ------------ CSS Reset / Base ------------ */
 *,
 *::before,
 *::after {
@@ -20,7 +15,6 @@
 html,
 body {
   height: 100%;
-  
 }
 
 html {
@@ -51,20 +45,7 @@ object {
   max-width: 100%;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: var(--text);
-  margin: 0 0 .6rem 0;
-  line-height: 1.25;
-}
 
-p {
-  margin: 0 0 1rem 0;
-}
 
 ul,
 ol {
@@ -87,24 +68,7 @@ a:hover {
 }
 
 /* ------------ Containers / Layout ------------ */
-.container {
-  width: min(1120px, 92vw);
-  margin: 0 auto;
-  padding: 16px;
-}
 
-.grid {
-  display: grid;
-  gap: 16px;
-}
-
-.grid-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.grid-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
 
 @media (max-width: 800px) {
 
@@ -114,20 +78,6 @@ a:hover {
   }
 }
 
-/* ------------ Surface / Card ------------ */
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-1);
-  border-radius: var(--radius-m);
-  padding: 12px;
-}
-
-.card-lg {
-  padding: 18px;
-  border-radius: var(--radius-l);
-  box-shadow: var(--shadow-2);
-}
 
 /* ------------ Buttons ------------ */
 .btn {
@@ -289,30 +239,6 @@ input[type="number"]:focus {
 .table thead th {
   font-weight: 700;
   border-bottom: 1px solid color-mix(in oklab, var(--border) 70%, var(--ink-600));
-}
-
-/* ------------ Navbar / Footer (optional helpers) ------------ */
-.navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 12px;
-  border-bottom: 1px solid var(--border);
-  background: var(--surface);
-  position: sticky;
-  top: 0;
-  z-index: 20;
-}
-
-.navbar-title {
-  font-weight: 800;
-  letter-spacing: .3px;
-}
-
-.navbar-actions {
-  display: flex;
-  align-items: center;
-  gap: .5rem;
 }
 
 .footer {
@@ -572,91 +498,9 @@ input[type="number"]:focus {
   }
 }
 
-/* Base */
-.logo {
-  font-family: "Poppins", "Inter", sans-serif;
-  font-weight: 700;
-  font-size: 1.6rem;
-  letter-spacing: -0.5px;
-  text-transform: uppercase;
-  margin: 0;
-  padding: 0;
-}
 
-/* "Cine" — gradient (sun-300 → coral) */
-.logo .cine {
-  display: inline-block;
-  /* helps gradient clipping */
-  background-image: linear-gradient(90deg, var(--sun-300), var(--coral));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  /* reveal gradient */
-  -webkit-text-fill-color: transparent;
 
-}
 
-/* "Rate" — solid white */
-.logo .rate {
-  color: #fff;
-  /* solid white */
-  -webkit-text-fill-color: #fff;
-  /* ensure Safari doesn’t inherit transparent */
-  background: none;
-  /* override any gradient */
-
-}
-
-/* --- Tabs --- */
-.tabs {
-  display: flex;
-  gap: 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.tab {
-  appearance: none;
-  background: transparent;
-  border: none;
-  margin: 0;
-  padding: 10px 14px;
-  font: inherit;
-  font-weight: 700;
-  color: color-mix(in oklab, var(--text) 70%, transparent);
-  position: relative;
-  cursor: pointer;
-}
-
-.tab:hover {
-  color: var(--text);
-}
-
-.tab:focus-visible {
-  outline: none;
-  box-shadow: var(--focus);
-  border-radius: var(--radius-s);
-}
-
-/* Active indicator */
-.tab[aria-selected="true"] {
-  color: var(--text);
-}
-
-.tab[aria-selected="true"]::after {
-  content: "";
-  position: absolute;
-  left: 8px;
-  right: 8px;
-  bottom: -1px;
-  height: 3px;
-  border-radius: 3px 3px 0 0;
-  background: linear-gradient(90deg, var(--sun-300), var(--coral));
-}
-
-/* Optional: subtle separator between tabs */
-.tab+.tab {
-  box-shadow: inset 1px 0 0 0 color-mix(in oklab, var(--border) 70%, transparent);
-}
 
 /* Sticky Footer Layout */
 html,
@@ -849,33 +693,4 @@ body {
   opacity: 0.75;
   color: var(--accent-contrast);
   font-style: italic;
-}
-
-/* Confetti fallback */
-.confetti-container {
-  position: fixed;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 9999;
-}
-
-.confetti {
-  position: absolute;
-  top: -10px;
-  width: 8px;
-  height: 12px;
-  transform: rotate(0deg);
-  animation: confetti-fall 2s ease-in forwards;
-  border-radius: 2px;
-}
-
-@keyframes confetti-fall {
-  0% {
-    transform: translateY(0) rotate(0deg);
-  }
-
-  100% {
-    transform: translateY(110vh) rotate(360deg);
-  }
 }

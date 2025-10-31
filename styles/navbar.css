@@ -1,0 +1,71 @@
+.navbar {
+  padding: 5px 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.logo{
+  justify-self: left;
+  display: inline-block;
+}
+
+.nav-group{
+float: right;
+display: inline-block;
+}
+
+.navbar-title {
+  font-weight: 800;
+  letter-spacing: .3px;
+}
+
+
+
+/* existing */
+.show-sm {
+  display: none;
+}
+
+.hide-sm {
+  display: inline-flex;
+}
+
+@media (max-width: 719.98px) {
+  .hide-sm {
+    display: none !important;
+  }
+
+  .show-sm {
+    display: inline-block !important;
+  }
+
+}
+
+.explore {
+  position: relative;
+}
+.explore summary {
+  list-style: none; 
+  cursor: pointer;
+}
+.explore summary::-webkit-details-marker { display: none; } 
+.explore .dropdown {
+  position: absolute;
+  top: 44px;                  
+  left: 0;
+  min-width: 200px;
+  z-index: 40;
+  padding: 8px;
+}
+.explore[open] .dropdown { display: block; }
+
+
+.card.dropdown { 
+  position: absolute;
+  min-width: 220px;
+  padding: 8px;
+  z-index: 40;
+}
