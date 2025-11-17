@@ -51,7 +51,7 @@ export default function DashboardPage() {
 
     async function onConnect() {
       try {
-        const idToken = await currentUser.getIdToken();
+        const idToken = await currentUser.getIdToken(true);
         socket.emit("auth:hello", { idToken }, (res) => {
           if (!res?.ok) {
             alert("Auth failed with game server");

@@ -29,22 +29,11 @@
 }
 
 .show-sm {
-  display: none;
+  display: inline-flex;
 }
 
 .hide-sm {
   display: inline-flex;
-}
-
-@media (max-width: 719.98px) {
-  .hide-sm {
-    display: none !important;
-  }
-
-  .show-sm {
-    display: inline-block !important;
-  }
-
 }
 
 .explore {
@@ -71,4 +60,58 @@
   min-width: 220px;
   padding: 8px;
   z-index: 40;
+}
+
+.icon {
+  --icon-size: 24px;
+  display: inline-grid;
+  place-items: center;
+  width: calc(var(--icon-size) + 10px);
+  height: calc(var(--icon-size) + 10px);
+  font-size: var(--icon-size);
+  background: transparent;
+  border: 0;
+  color: var(--text-muted, #8a8a8a);
+  cursor: pointer;
+  transition: color .15s ease, transform .04s ease;
+}
+
+.icon:hover {
+  color: var(--primary, #5aa7ff);
+}
+
+.icon:active {
+  color: var(--primary-strong, #2a7fff);
+  transform: translateY(1px) scale(0.98);
+}
+
+.icon:focus-visible {
+  outline: 2px solid var(--primary, #5aa7ff);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.avatar-icon {
+  border: 1px solid var(--border);
+  font-weight: 700;
+  border-radius: 50%;
+}
+
+.avatar-icon:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+/* Explore dropdown trigger (hamburger) as icon */
+.explore summary {
+  display: inline-grid;
+  place-items: center;
+  padding: 0;
+  /* remove default button padding */
+}
+
+.explore .icon {
+  /* reuse icon styles for summary > span */
+  width: auto;
+  height: auto;
 }

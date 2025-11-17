@@ -28,10 +28,6 @@ export default function AboutPage() {
         one of many small worlds my brother and I dreamed up. I hope you enjoy playing it as much as
         we enjoyed inventing it.
       </p>
-
-      <p style={{ marginTop: "2rem", fontStyle: "italic", opacity: 0.8 }}>
-        — Made with love by <strong>Sunbalm</strong>
-      </p>
     </main>
   );
 }

@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useAuth } from "@/contexts/AuthProvider";
-import { useMusic } from "@/contexts/MusicProvider";
+// import { useMusic } from "@/contexts/MusicProvider";
 import { getAuth, signOut as fbSignOut } from "firebase/auth";
 import { useToast } from "@/contexts/ToastProvider";
 
@@ -11,7 +11,7 @@ export default function Navbar() {
   const { currentUser, signOut: ctxSignOut } = useAuth() || {};
   const [open, setOpen] = useState(false);
   const router = useRouter();
-  const music = useMusic();
+  // const music = useMusic();
   const { show } = useToast();
 
   function getInitials(name, email) {
@@ -50,39 +50,31 @@ export default function Navbar() {
       </h1>
 
       <div className='nav-group'>
-        <div className="hide-sm nav-links">
-          <button className="btn btn-ghost" onClick={() => router.push("/about")}>About</button>
-          <button className="btn btn-ghost" onClick={() => router.push("/how-to-play")}>How to Play</button>
-          <button className="btn btn-ghost" onClick={() => router.push("/donate")}>Donate</button>
-          <button className="btn btn-ghost" onClick={() => router.push("/feedback")}>Feedback</button>
-        </div>
-
-
-        <details className="show-sm explore">
-          <summary className="btn btn-ghost">☰ ▾</summary>
+        {/* <details className="show-sm explore">
+          <summary className="icon">☰ ▾</summary>
           <div role="menu" className="card dropdown">
             <div style={{ display: "grid", gap: 8 }}>
-              <button className="btn btn-ghost" onClick={() => router.push("/about")}>About</button>
-              <button className="btn btn-ghost" onClick={() => router.push("/how-to-play")}>How to Play</button>
-              <button className="btn btn-ghost" onClick={() => router.push("/donate")}>Donate</button>
-              <button className="btn btn-ghost" onClick={() => router.push("/feedback")}>Feedback</button>
+              <button className="icon" onClick={() => router.push("/about")}>About</button>
+              <button className="icon" onClick={() => router.push("/how-to-play")}>How to Play</button>
+              <button className="icon" onClick={() => router.push("/donate")}>Donate</button>
+              <button className="icon" onClick={() => router.push("/feedback")}>Feedback</button>
             </div>
           </div>
-        </details>
+        </details> */}
 
 
-        <button
-          className="btn btn-ghost"
+        {/*<button
+          className="icon"
           onClick={() => music.setOpen(true)}
           title="Open Music Player"
           aria-label="Open Music Player"
         >
           ♪
-        </button>
+        </button>*/}
 
         {currentUser && (
           <button
-            className="btn btn-ghost"
+            className="icon"
             onClick={() => router.push("/dashboard")}
             title="Dashboard"
           >
@@ -105,7 +97,7 @@ export default function Navbar() {
           <div style={{ position: "relative" }}>
             <button
               onClick={() => setOpen((v) => !v)}
-              className="btn btn-ghost"
+              className="icon"
               title="Profile"
               style={{ width: 36, height: 36, borderRadius: "50%", fontWeight: 700 }}
               aria-haspopup="menu"

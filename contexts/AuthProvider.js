@@ -31,7 +31,13 @@ export function AuthProvider({ children }) {
   async function emailPasswordSignUp(email, password, displayName) {
     setError("");
     const cred = await createUserWithEmailAndPassword(auth, email, password);
-    if (displayName) await updateProfile(cred.user, { displayName });
+
+    if (displayName) {
+      await updateProfile(cred.user, { displayName });
+      // ensure server sees the new name immediately
+      await cred.user.reload();
+      await cred.user.getIdToken(true); // force refresh id token with profile name
+    }
     return cred.user;
   }
 

@@ -8,10 +8,13 @@ export default function Footer() {
       <div className="footer-bottom">
         <div className="container footer-bottom-row">
           <small>© {new Date().getFullYear()} CineRate</small>
-          <div className="footer-meta">
+          {/* <div className="footer-meta">
             <small><Link href="/terms">Terms</Link>
               <span aria-hidden> • </span>
               <Link href="/privacy">Privacy</Link></small>
+          </div> */}
+          <div className="footer-meta">
+            <small>Nicholas R. Kolodziej</small>
           </div>
         </div>
       </div>
